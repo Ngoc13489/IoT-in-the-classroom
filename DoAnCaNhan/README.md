@@ -6,7 +6,7 @@ Mochi là nguyên mẫu thú cưng ảo được xây dựng bằng **ESP32** v�
 
 ## Trải nghiệm dự án
 
-- **Mô phỏng Wokwi:** [Mở dự án Mochi](https://wokwi.com/projects/479910431597134849) *(kiểm tra liên kết trỏ đúng phiên bản công khai trước khi phát hành repository)*.
+- **Mô phỏng Wokwi:** [Mở dự án Mochi](https://wokwi.com/projects/479910431597134849).
 - **Video demo YouTube:** Chưa công bố – sẽ cập nhật đường dẫn sau khi đăng video.
 - **Báo cáo:** Xem thư mục `docs/` khi tài liệu được đưa lên repository.
 

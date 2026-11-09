@@ -26,21 +26,16 @@ Các ngưỡng và chu kỳ dưới đây là **cấu hình của nguyên mẫu*
 Cấu trúc dưới đây là **cách sắp xếp đề xuất** để người khác dễ tìm mã nguồn và tái lập dự án. Chỉ đưa lên những tệp thực sự có; không cần tạo ảnh hoặc tệp rỗng chỉ để đủ cấu trúc.
 
 ```text
-mochi-esp32/
-├── README.md
-├── sketch.ino                 # Mã chương trình ESP32 cho Wokwi
-├── diagram.json               # Sơ đồ linh kiện và kết nối Wokwi
-├── libraries.txt              # Danh sách thư viện, nếu dự án sử dụng
-├── node-red/
-│   └── mochi-dashboard.json   # Flow Node-RED đã xuất, không chứa thông tin bí mật
-├── docs/
-│   ├── bao-cao.pdf            # Báo cáo đồ án, nếu công khai
-│   └── kiem-thu.md            # Biên bản và phạm vi kiểm thử
-└── media/
-    ├── circuit.png            # Ảnh chụp thực tế từ Wokwi
-    ├── pet.png
-    ├── monitor.png
-    └── dashboard.png
+IoT-in-the-classroom/
+└── DoAnCaNhan/
+    ├── README.md
+    ├── Mochi_v1_6_MQTT_Dashboard_Stable/
+    │   └── ... tệp dự án Wokwi
+    ├── Mochi_NodeRED_Dashboard.json
+    ├── docs/
+    │   └── BC_CaNhanIoT_NTHN.pdf
+    └── images/
+        └── ... ảnh minh họa
 ```
 
 **Vì sao đặt `sketch.ino`, `diagram.json` ở thư mục gốc?** Đây là cách đơn giản để sao chép hoặc đối chiếu trực tiếp với một dự án Wokwi. Nếu mã nguồn hiện tại dùng PlatformIO (`src/main.cpp`, `platformio.ini`) hoặc nhiều tệp `.h/.cpp`, giữ nguyên cấu trúc đang biên dịch thành công và cập nhật cây thư mục này cho đúng thực tế.

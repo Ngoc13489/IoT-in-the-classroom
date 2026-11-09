@@ -1,0 +1,88 @@
+{
+  "version": 1,
+  "author": "Mochi v2",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-breadboard-half", "id": "bb2", "top": 246.6, "left": -486.8, "attrs": {} },
+    { "type": "board-esp32-devkit-c-v4", "id": "esp1", "top": 38.4, "left": -388.76, "attrs": {} },
+    {
+      "type": "board-ssd1306",
+      "id": "oled1",
+      "top": 156.74,
+      "left": -220.57,
+      "attrs": { "i2cAddress": "0x3c" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": 468.3,
+      "left": -234,
+      "rotate": 180,
+      "attrs": { "temperature": "19.5", "humidity": "34.5" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "touch1",
+      "top": 464.3,
+      "left": -300.1,
+      "rotate": 90,
+      "attrs": { "color": "green", "label": "TOUCH" }
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "soundMock1",
+      "top": 453.3,
+      "left": -469.4,
+      "rotate": 180,
+      "attrs": { "value": "0" }
+    },
+    {
+      "type": "wokwi-photoresistor-sensor",
+      "id": "ldr1",
+      "top": 515.3,
+      "left": -446.9,
+      "rotate": 270,
+      "attrs": { "lux": "500", "threshold": "2.5" }
+    },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "mode1",
+      "top": 459.8,
+      "left": -323.1,
+      "rotate": 180,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "esp1:GND.1", "bb2:tn.6", "black", [ "h0" ] ],
+    [ "esp1:27", "bb2:7t.a", "yellow", [ "h0" ] ],
+    [ "esp1:34", "bb2:3t.a", "orange", [ "h0" ] ],
+    [ "esp1:3V3", "bb2:tp.1", "red", [ "h0" ] ],
+    [ "esp1:21", "bb2:20t.a", "green", [ "h0" ] ],
+    [ "esp1:22", "bb2:21t.a", "blue", [ "h0" ] ],
+    [ "bb2:21t.c", "oled1:SCL", "blue", [ "h19.2", "v-182.4", "h76.5" ] ],
+    [ "bb2:20t.b", "oled1:SDA", "green", [ "h19.2", "v-182.4", "h95.93" ] ],
+    [ "bb2:tp.25", "bb2:bp.25", "red", [ "h1.6", "v174" ] ],
+    [ "bb2:tn.1", "bb2:bn.1", "black", [ "h1.6", "v174" ] ],
+    [ "bb2:bp.2", "soundMock1:VCC", "red", [ "v0" ] ],
+    [ "soundMock1:GND", "bb2:bn.4", "black", [ "v0" ] ],
+    [ "bb2:3t.e", "soundMock1:SIG", "orange", [ "v86.4", "h9.6", "v38.4" ] ],
+    [ "dht1:VCC", "bb2:bp.24", "red", [ "v0" ] ],
+    [ "dht1:GND", "bb2:bn.21", "black", [ "v0" ] ],
+    [ "oled1:VCC", "bb2:tp.20", "red", [ "v-19.2", "h-67.05", "v114.9" ] ],
+    [ "oled1:GND", "bb2:tn.20", "black", [ "v-9.6", "h-48", "v115.3" ] ],
+    [ "bb2:7t.e", "dht1:SDA", "yellow", [ "v48", "h201.7" ] ],
+    [ "esp1:35", "bb2:4t.a", "violet", [ "h0" ] ],
+    [ "esp1:32", "bb2:5t.a", "purple", [ "h0" ] ],
+    [ "esp1:25", "bb2:6t.a", "limegreen", [ "h-28.65", "v153.6" ] ],
+    [ "bb2:6t.e", "touch1:1.l", "limegreen", [ "v57.6", "h163.2" ] ],
+    [ "bb2:5t.e", "mode1:2", "purple", [ "v67.2", "h115.3" ] ],
+    [ "bb2:4t.e", "ldr1:AO", "violet", [ "v76.8", "h87.1" ] ],
+    [ "bb2:bp.8", "ldr1:VCC", "red", [ "v0" ] ],
+    [ "bb2:bn.9", "ldr1:GND", "black", [ "v0" ] ],
+    [ "bb2:bn.17", "touch1:2.l", "black", [ "v0" ] ],
+    [ "bb2:bn.13", "mode1:3", "black", [ "v0" ] ],
+    [ "bb2:bp.15", "mode1:1", "red", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}

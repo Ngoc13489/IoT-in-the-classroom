@@ -1,0 +1,329 @@
+[
+    {
+        "id": "f4a40bf9122ed9a5",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "mochi_tab_6c",
+        "type": "tab",
+        "label": "Mochi Dashboard 6C",
+        "disabled": false,
+        "info": "MQTT dashboard for Mochi"
+    },
+    {
+        "id": "82a78525da7388cc",
+        "type": "mqtt-broker",
+        "name": "HiveMQ Mochi",
+        "broker": "broker.hivemq.com",
+        "port": 1883,
+        "clientid": "mochi_nodered_84721",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "25b4b75d94f8767a",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "99bfcd886ce73b40",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#fcfcfd",
+            "primary": "#0d74ce",
+            "bgPage": "#f9f9fb",
+            "groupBg": "#ffffff",
+            "groupOutline": "#d9d9e0"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "mochi_broker_6c",
+        "type": "mqtt-broker",
+        "name": "HiveMQ Mochi",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "mochi_nodered_dash_84721",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {}
+    },
+    {
+        "id": "mochi_theme_6c",
+        "type": "ui-theme",
+        "name": "Mochi Theme",
+        "colors": {
+            "surface": "#091b2f",
+            "primary": "#22d3ee",
+            "bgPage": "#071426",
+            "groupBg": "#10253b",
+            "groupOutline": "#1d5069"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "16px",
+            "groupGap": "16px",
+            "groupBorderRadius": "12px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "mochi_page_6c",
+        "type": "ui-page",
+        "name": "Tổng quan",
+        "ui": "25b4b75d94f8767a",
+        "path": "/mochi",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "mochi_theme_6c",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "tabs": [],
+        "order": 1,
+        "className": "",
+        "visible": true,
+        "disabled": false
+    },
+    {
+        "id": "eea938a01c7a6ab0",
+        "type": "ui-group",
+        "name": "Mochi Control Center",
+        "page": "mochi_page_6c",
+        "width": "12",
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default",
+        "keepLoaded": false,
+        "tab": ""
+    },
+    {
+        "id": "dc809b05501dc37e",
+        "type": "mqtt in",
+        "z": "f4a40bf9122ed9a5",
+        "name": "HiveMQ Mochi",
+        "topic": "mochi/v1/test84721/telemetry",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "82a78525da7388cc",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 200,
+        "wires": [
+            [
+                "0891aa1e24a841eb"
+            ]
+        ]
+    },
+    {
+        "id": "0891aa1e24a841eb",
+        "type": "json",
+        "z": "f4a40bf9122ed9a5",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 370,
+        "y": 200,
+        "wires": [
+            [
+                "737e311f7bc71ee5"
+            ]
+        ]
+    },
+    {
+        "id": "737e311f7bc71ee5",
+        "type": "debug",
+        "z": "f4a40bf9122ed9a5",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "mochi_mqtt_6c",
+        "type": "mqtt in",
+        "z": "mochi_tab_6c",
+        "name": "Mochi telemetry",
+        "topic": "mochi/v1/test84721/telemetry",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "mochi_broker_6c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 100,
+        "wires": [
+            [
+                "mochi_json_6c"
+            ]
+        ]
+    },
+    {
+        "id": "mochi_json_6c",
+        "type": "json",
+        "z": "mochi_tab_6c",
+        "name": "Parse JSON",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 355,
+        "y": 100,
+        "wires": [
+            [
+                "6ea6662f1c969811"
+            ]
+        ]
+    },
+    {
+        "id": "6ea6662f1c969811",
+        "type": "function",
+        "z": "mochi_tab_6c",
+        "name": "Chuẩn hóa Dashboard",
+        "func": "\nconst p = msg.payload || {};\n\nif (typeof p !== \"object\" || Array.isArray(p)) {\n    return null;\n}\n\nconst toNumber = (v) => {\n    if (v === null || v === undefined || v === \"\") return null;\n    const n = Number(v);\n    return Number.isFinite(n) ? n : null;\n};\n\nmsg.payload = {\n    device_id: p.device_id || \"mochi_esp32_01\",\n    mode: p.mode || \"UNKNOWN\",\n    temperature_c: toNumber(p.temperature_c),\n    humidity_pct: toNumber(p.humidity_pct),\n    light_pct: toNumber(p.light_pct),\n    sound_adc: toNumber(p.sound_adc),\n    temperature_status: ({\n        NORMAL: \"Bình thường\",\n        HOT: \"Nóng\",\n        COLD: \"Lạnh\"\n    })[p.temperature_status] || \"Không xác định\",\n    sleeping: p.sleeping === true,\n    dht_ok: p.dht_ok === true,\n    received_at: Date.now()\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 100,
+        "wires": [
+            [
+                "e7345d1fcb9746f8"
+            ]
+        ]
+    },
+    {
+        "id": "e7345d1fcb9746f8",
+        "type": "ui-template",
+        "z": "mochi_tab_6c",
+        "group": "eea938a01c7a6ab0",
+        "page": "",
+        "ui": "",
+        "name": "Mochi Control Center UI",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "head": "",
+        "format": "\n<template>\n  <div class=\"mc\">\n    <!-- HEADER -->\n    <header class=\"mc-header\">\n      <div class=\"mc-identity\">\n        <div class=\"mc-logo\">\n          <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\">\n            <rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"4\"/>\n            <path d=\"M8 3V1M16 3V1M8 23v-2M16 23v-2M3 8H1M3 16H1M23 8h-2M23 16h-2\"/>\n            <path d=\"M8 14l3-4 3 3 2-3\"/>\n          </svg>\n        </div>\n        <div>\n          <h1>Mochi</h1>\n          <p>Giám sát thiết bị ESP32</p>\n        </div>\n      </div>\n\n      <div class=\"mc-connection\" :class=\"connectionClass\">\n        <span class=\"mc-dot\"></span>\n        <span>{{ connectionLabel }}</span>\n      </div>\n    </header>\n\n    <!-- DEVICE STATUS -->\n    <section class=\"mc-statusbar\">\n      <div class=\"mc-status-main\">\n        <div class=\"mc-section-label\">Trạng thái hiện tại</div>\n        <div class=\"mc-status-pills\">\n          <span class=\"mc-pill mc-mode\">{{ modeLabel }}</span>\n          <span class=\"mc-pill\" :class=\"temperatureClass\">\n            {{ temperatureLabel }}\n          </span>\n          <span class=\"mc-status-text\">{{ sleepLabel }}</span>\n        </div>\n      </div>\n      <div class=\"mc-status-time\">\n        <span>Cập nhật gần nhất</span>\n        <strong>{{ lastUpdate }}</strong>\n      </div>\n    </section>\n\n    <!-- SENSOR KPIs -->\n    <section class=\"mc-metrics\">\n      <article class=\"mc-metric\">\n        <div class=\"mc-metric-top\">\n          <span>Nhiệt độ</span>\n          <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\">\n            <path d=\"M14 14.8V5a3 3 0 0 0-6 0v9.8a5 5 0 1 0 6 0Z\"/>\n            <path d=\"M11 9v9\"/>\n          </svg>\n        </div>\n        <div class=\"mc-number\">\n          {{ fmt(data.temperature_c, 1) }}<small>°C</small>\n        </div>\n        <div class=\"mc-metric-note\">Nhiệt độ môi trường</div>\n      </article>\n\n      <article class=\"mc-metric\">\n        <div class=\"mc-metric-top\">\n          <span>Độ ẩm</span>\n          <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\">\n            <path d=\"M12 2C9 7 5 11 5 15a7 7 0 0 0 14 0c0-4-4-8-7-13Z\"/>\n            <path d=\"M9 17a3 3 0 0 0 3 3\"/>\n          </svg>\n        </div>\n        <div class=\"mc-number\">\n          {{ fmt(data.humidity_pct, 1) }}<small>%</small>\n        </div>\n        <div class=\"mc-metric-note\">Độ ẩm không khí</div>\n      </article>\n\n      <article class=\"mc-metric\">\n        <div class=\"mc-metric-top\">\n          <span>Ánh sáng</span>\n          <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\">\n            <circle cx=\"12\" cy=\"12\" r=\"4\"/>\n            <path d=\"M12 2v2M12 20v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4\"/>\n          </svg>\n        </div>\n        <div class=\"mc-number\">\n          {{ fmt(data.light_pct, 1) }}<small>%</small>\n        </div>\n        <div class=\"mc-metric-note\">Mức sáng tương đối</div>\n      </article>\n\n      <article class=\"mc-metric\">\n        <div class=\"mc-metric-top\">\n          <span>Âm thanh</span>\n          <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\">\n            <rect x=\"9\" y=\"3\" width=\"6\" height=\"12\" rx=\"3\"/>\n            <path d=\"M5 11a7 7 0 0 0 14 0M12 18v4m-4 0h8\"/>\n          </svg>\n        </div>\n        <div class=\"mc-number\">\n          {{ fmt(data.sound_adc, 0) }}<small>ADC</small>\n        </div>\n        <div class=\"mc-metric-note\">Giá trị đọc từ cảm biến</div>\n      </article>\n    </section>\n\n    <!-- CHART AND DETAILS -->\n    <section class=\"mc-content\">\n      <article class=\"mc-panel mc-chart-panel\">\n        <div class=\"mc-panel-header\">\n          <div>\n            <h2>Lịch sử nhiệt độ</h2>\n            <p>{{ history.length }} / 60 mẫu trong phiên xem</p>\n          </div>\n          <div class=\"mc-chart-legend\">\n            <span class=\"mc-legend-line\"></span>\n            Nhiệt độ (°C)\n          </div>\n        </div>\n\n        <div class=\"mc-chart\">\n          <svg viewBox=\"0 0 700 260\"\n               preserveAspectRatio=\"none\"\n               role=\"img\"\n               aria-label=\"Biểu đồ lịch sử nhiệt độ\">\n            <g v-for=\"(tick, i) in yTicks\" :key=\"i\">\n              <line x1=\"54\" :y1=\"tick.y\"\n                    x2=\"684\" :y2=\"tick.y\"\n                    class=\"mc-grid-line\"/>\n              <text x=\"42\" :y=\"tick.y + 4\"\n                    text-anchor=\"end\"\n                    class=\"mc-axis-text\">\n                {{ tick.label }}\n              </text>\n            </g>\n\n            <polyline v-if=\"history.length > 1\"\n                      :points=\"chartPoints\"\n                      class=\"mc-chart-line\"/>\n\n            <circle v-if=\"history.length > 0\"\n                    :cx=\"lastPoint.x\"\n                    :cy=\"lastPoint.y\"\n                    r=\"4\"\n                    class=\"mc-chart-point\"/>\n\n            <text x=\"54\" y=\"248\" class=\"mc-axis-text\">\n              {{ firstTime }}\n            </text>\n            <text x=\"684\" y=\"248\"\n                  text-anchor=\"end\"\n                  class=\"mc-axis-text\">\n              {{ latestTime }}\n            </text>\n          </svg>\n\n          <div v-if=\"history.length === 0\" class=\"mc-chart-empty\">\n            Chưa có dữ liệu nhiệt độ\n          </div>\n        </div>\n\n        <div class=\"mc-chart-footer\">\n          <span>Thời gian nhận dữ liệu</span>\n          <span>Thang đo tự động</span>\n        </div>\n      </article>\n\n      <article class=\"mc-panel mc-details\">\n        <div class=\"mc-panel-header\">\n          <div>\n            <h2>Chi tiết thiết bị</h2>\n            <p>Trạng thái từ bản tin gần nhất</p>\n          </div>\n        </div>\n\n        <div class=\"mc-detail-row\">\n          <span>Chế độ</span>\n          <strong>{{ modeLabel }}</strong>\n        </div>\n        <div class=\"mc-detail-row\">\n          <span>Nhiệt độ</span>\n          <strong :class=\"temperatureTextClass\">\n            {{ temperatureLabel }}\n          </strong>\n        </div>\n        <div class=\"mc-detail-row\">\n          <span>Giấc ngủ</span>\n          <strong>{{ sleepLabel }}</strong>\n        </div>\n        <div class=\"mc-detail-row\">\n          <span>Cảm biến DHT</span>\n          <strong :class=\"dhtClass\">{{ dhtLabel }}</strong>\n        </div>\n        <div class=\"mc-detail-row\">\n          <span>Dữ liệu MQTT</span>\n          <strong>{{ connectionShortLabel }}</strong>\n        </div>\n      </article>\n    </section>\n\n    <!-- FOOTER -->\n    <footer class=\"mc-footer\">\n      <div class=\"mc-footer-device\">\n        <span class=\"mc-footer-label\">Thiết bị</span>\n        <strong>{{ data.device_id }}</strong>\n      </div>\n      <div class=\"mc-footer-meta\">\n        <span>ESP32</span>\n        <span class=\"mc-separator\"></span>\n        <span>MQTT</span>\n        <span class=\"mc-separator\"></span>\n        <span>Node-RED Dashboard</span>\n      </div>\n    </footer>\n  </div>\n</template>\n\n<script>\nexport default {\n  data() {\n    return {\n      data: {\n        device_id: \"Chưa xác định\",\n        mode: null,\n        temperature_c: null,\n        humidity_pct: null,\n        light_pct: null,\n        sound_adc: null,\n        temperature_status: null,\n        sleeping: null,\n        dht_ok: null\n      },\n      history: [],\n      hasData: false,\n      lastSeen: null,\n      now: Date.now(),\n      timer: null\n    };\n  },\n\n  computed: {\n    age() {\n      return this.lastSeen === null\n        ? Infinity\n        : Math.max(0, this.now - this.lastSeen);\n    },\n\n    connectionClass() {\n      if (!this.hasData) return \"mc-waiting\";\n      return this.age < 60000 ? \"mc-online\" : \"mc-offline\";\n    },\n\n    connectionLabel() {\n      if (!this.hasData) return \"Chờ dữ liệu\";\n      return this.age < 60000\n        ? \"Đang nhận dữ liệu\"\n        : \"Không có dữ liệu mới\";\n    },\n\n    connectionShortLabel() {\n      if (!this.hasData) return \"Chưa nhận\";\n      return this.age < 60000 ? \"Gần đây\" : \"Gián đoạn\";\n    },\n\n    modeLabel() {\n      const mode = this.data.mode;\n      return mode === \"PET\" || mode === \"MONITOR\"\n        ? mode : \"Chưa xác định\";\n    },\n\n    temperatureLabel() {\n      const s = this.data.temperature_status;\n      if (s === \"HOT\" || s === \"Nóng\") return \"Nóng\";\n      if (s === \"COLD\" || s === \"Lạnh\") return \"Lạnh\";\n      if (s === \"NORMAL\" || s === \"Bình thường\")\n        return \"Bình thường\";\n      return \"Chưa xác định\";\n    },\n\n    temperatureClass() {\n      if (this.temperatureLabel === \"Nóng\") return \"mc-hot\";\n      if (this.temperatureLabel === \"Lạnh\") return \"mc-cold\";\n      return \"mc-normal\";\n    },\n\n    temperatureTextClass() {\n      if (this.temperatureLabel === \"Nóng\") return \"mc-text-hot\";\n      if (this.temperatureLabel === \"Lạnh\") return \"mc-text-cold\";\n      return \"\";\n    },\n\n    sleepLabel() {\n      if (!this.hasData || this.data.sleeping === null)\n        return \"Chưa xác định\";\n      return this.data.sleeping ? \"Đang ngủ\" : \"Không ngủ\";\n    },\n\n    dhtLabel() {\n      if (!this.hasData || this.data.dht_ok === null)\n        return \"Chưa xác định\";\n      return this.data.dht_ok ? \"Bình thường\" : \"Lỗi đọc\";\n    },\n\n    dhtClass() {\n      return this.data.dht_ok === false ? \"mc-text-hot\" : \"\";\n    },\n\n    lastUpdate() {\n      if (this.lastSeen === null) return \"--:--:--\";\n      return new Date(this.lastSeen)\n        .toLocaleTimeString(\"vi-VN\");\n    },\n\n    chartBounds() {\n      const values = this.history.map(p => p.value);\n      if (!values.length) return { min: 0, max: 50 };\n\n      const low = Math.min(...values);\n      const high = Math.max(...values);\n      const padding = Math.max((high - low) * 0.15, 1);\n\n      return {\n        min: Math.floor((low - padding) / 2) * 2,\n        max: Math.ceil((high + padding) / 2) * 2\n      };\n    },\n\n    yTicks() {\n      const { min, max } = this.chartBounds;\n      return Array.from({ length: 5 }, (_, i) => ({\n        y: 20 + i * 50,\n        label: (max - (max - min) * i / 4).toFixed(1)\n      }));\n    },\n\n    \n  plotPoints() {\n    const { min, max } = this.chartBounds;\n    const range = max - min || 1;\n    const count = this.history.length;\n\n    if (!count) return [];\n\n    const start = this.history[0].time;\n    const end = this.history[count - 1].time;\n    const duration = end - start;\n\n    return this.history.map((p) => ({\n      x: duration > 0\n        ? 54 + ((p.time - start) / duration) * 630\n        : 684,\n      y: 220 - ((p.value - min) / range) * 200\n    }));\n  },\n\n\n    chartPoints() {\n      return this.plotPoints.map(p =>\n        `${p.x.toFixed(2)},${p.y.toFixed(2)}`\n      ).join(\" \");\n    },\n\n    lastPoint() {\n      return this.plotPoints[this.plotPoints.length - 1]\n        || { x: 54, y: 220 };\n    },\n\n    firstTime() {\n      if (!this.history.length) return \"--:--\";\n      return new Date(this.history[0].time)\n        .toLocaleTimeString(\"vi-VN\", {\n          hour: \"2-digit\", minute: \"2-digit\", second: \"2-digit\"\n        });\n    },\n\n    latestTime() {\n      if (!this.history.length) return \"--:--\";\n      return new Date(this.history[this.history.length - 1].time)\n        .toLocaleTimeString(\"vi-VN\", {\n          hour: \"2-digit\", minute: \"2-digit\", second: \"2-digit\"\n        });\n    }\n  },\n\n  methods: {\n    fmt(value, digits) {\n      if (value === null || value === undefined || value === \"\")\n        return \"--\";\n      const n = Number(value);\n      return Number.isFinite(n) ? n.toFixed(digits) : \"--\";\n    },\n\n    receive(message) {\n      if (!message || !message.payload ||\n          typeof message.payload !== \"object\" ||\n          Array.isArray(message.payload)) return;\n\n      const p = message.payload;\n      const received = Date.now();\n\n      this.data = { ...this.data, ...p };\n      this.hasData = true;\n      this.lastSeen = received;\n      this.now = received;\n\n      const t = p.temperature_c;\n      if (t !== null && t !== undefined &&\n          t !== \"\" && Number.isFinite(Number(t)) &&\n          p.dht_ok !== false) {\n        this.history.push({\n          value: Number(t),\n          time: received\n        });\n\n        if (this.history.length > 60) {\n          this.history.splice(0, this.history.length - 60);\n        }\n      }\n    }\n  },\n\n  watch: {\n    msg: {\n      handler(message) {\n        this.receive(message);\n      },\n      immediate: true\n    }\n  },\n\n  mounted() {\n    this.timer = setInterval(() => {\n      this.now = Date.now();\n    }, 1000);\n  },\n\n  unmounted() {\n    if (this.timer) clearInterval(this.timer);\n  }\n};\n</script>\n\n<style>\n.mc {\n  --mc-bg: #0d1c2c;\n  --mc-surface: #12273a;\n  --mc-border: #29445a;\n  --mc-text: #edf3f8;\n  --mc-muted: #9bb0c2;\n  --mc-accent: #48b8d0;\n  --mc-green: #43c69b;\n  --mc-red: #f28c80;\n  --mc-blue: #80b8f4;\n\n  color: var(--mc-text);\n  font-family: Inter, \"Segoe UI\", Arial, sans-serif;\n  font-size: 14px;\n  line-height: 1.5;\n  width: 100%;\n  box-sizing: border-box;\n  padding: 6px 8px 12px;\n}\n\n.mc *,\n.mc *::before,\n.mc *::after {\n  box-sizing: border-box;\n}\n\n.mc h1,\n.mc h2,\n.mc p {\n  margin: 0;\n}\n\n.mc-header {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 20px;\n  padding: 10px 0 22px;\n  border-bottom: 1px solid var(--mc-border);\n}\n\n.mc-identity {\n  display: flex;\n  align-items: center;\n  gap: 14px;\n}\n\n.mc-logo {\n  width: 44px;\n  height: 44px;\n  display: grid;\n  place-items: center;\n  background: #18384b;\n  border-radius: 10px;\n}\n\n.mc-logo svg {\n  width: 23px;\n  height: 23px;\n  fill: none;\n  stroke: var(--mc-accent);\n  stroke-width: 1.6;\n  stroke-linecap: round;\n  stroke-linejoin: round;\n}\n\n.mc-identity h1 {\n  font-size: 25px;\n  font-weight: 650;\n  letter-spacing: -0.6px;\n}\n\n.mc-identity p {\n  color: var(--mc-muted);\n  font-size: 12px;\n  margin-top: 2px;\n}\n\n.mc-connection {\n  display: inline-flex;\n  align-items: center;\n  gap: 9px;\n  font-size: 12px;\n  font-weight: 550;\n  white-space: nowrap;\n}\n\n.mc-dot {\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background: currentColor;\n}\n\n.mc-online { color: var(--mc-green); }\n.mc-offline { color: var(--mc-red); }\n.mc-waiting { color: #d5ad68; }\n\n.mc-statusbar {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: 20px;\n  padding: 22px 0;\n}\n\n.mc-section-label {\n  font-size: 12px;\n  font-weight: 550;\n  color: var(--mc-muted);\n  margin-bottom: 10px;\n}\n\n.mc-status-pills {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  flex-wrap: wrap;\n}\n\n.mc-pill {\n  display: inline-flex;\n  align-items: center;\n  padding: 5px 11px;\n  border-radius: 6px;\n  font-size: 12px;\n  font-weight: 600;\n  border: 1px solid var(--mc-border);\n  background: #1b3549;\n}\n\n.mc-mode { color: #e3edf5; }\n.mc-hot { color: var(--mc-red); background: #3b292f; }\n.mc-cold { color: var(--mc-blue); background: #20344b; }\n.mc-normal { color: var(--mc-green); background: #1c3a3a; }\n\n.mc-status-text {\n  font-size: 12px;\n  color: var(--mc-muted);\n  padding-left: 4px;\n}\n\n.mc-status-time {\n  display: flex;\n  flex-direction: column;\n  gap: 3px;\n  text-align: right;\n  font-size: 12px;\n}\n\n.mc-status-time span { color: var(--mc-muted); }\n.mc-status-time strong { font-weight: 600; }\n\n.mc-metrics {\n  display: grid;\n  grid-template-columns: repeat(4, minmax(0, 1fr));\n  gap: 12px;\n  margin-bottom: 14px;\n}\n\n.mc-metric,\n.mc-panel {\n  background: var(--mc-surface);\n  border: 1px solid var(--mc-border);\n  border-radius: 10px;\n}\n\n.mc-metric {\n  min-width: 0;\n  padding: 18px 19px 16px;\n}\n\n.mc-metric-top {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: 10px;\n  color: var(--mc-muted);\n  font-size: 13px;\n}\n\n.mc-metric-top svg {\n  width: 19px;\n  height: 19px;\n  fill: none;\n  stroke: var(--mc-muted);\n  stroke-width: 1.65;\n  stroke-linecap: round;\n  stroke-linejoin: round;\n  flex-shrink: 0;\n}\n\n.mc-number {\n  display: flex;\n  align-items: baseline;\n  flex-wrap: wrap;\n  gap: 7px;\n  font-size: clamp(25px, 3vw, 35px);\n  font-weight: 650;\n  letter-spacing: -0.8px;\n  font-variant-numeric: tabular-nums;\n  margin: 17px 0 12px;\n  line-height: 1.2;\n}\n\n.mc-number small {\n  font-size: 13px;\n  color: var(--mc-muted);\n  font-weight: 500;\n  letter-spacing: 0;\n}\n\n.mc-metric-note {\n  font-size: 11px;\n  color: var(--mc-muted);\n}\n\n.mc-content {\n  display: grid;\n  grid-template-columns: minmax(0, 1.7fr) minmax(270px, 1fr);\n  gap: 12px;\n}\n\n.mc-panel {\n  padding: 20px;\n  min-width: 0;\n}\n\n.mc-panel-header {\n  display: flex;\n  justify-content: space-between;\n  align-items: flex-start;\n  gap: 16px;\n}\n\n.mc-panel-header h2 {\n  font-size: 16px;\n  font-weight: 650;\n  letter-spacing: -0.2px;\n}\n\n.mc-panel-header p {\n  margin-top: 4px;\n  font-size: 12px;\n  color: var(--mc-muted);\n}\n\n.mc-chart-legend {\n  display: flex;\n  align-items: center;\n  gap: 7px;\n  color: var(--mc-muted);\n  font-size: 11px;\n  white-space: nowrap;\n}\n\n.mc-legend-line {\n  display: inline-block;\n  width: 16px;\n  height: 3px;\n  border-radius: 2px;\n  background: var(--mc-accent);\n}\n\n.mc-chart {\n  position: relative;\n  width: 100%;\n  height: 280px;\n  margin-top: 12px;\n}\n\n.mc-chart svg {\n  display: block;\n  width: 100%;\n  height: 100%;\n  overflow: visible;\n}\n\n.mc-grid-line {\n  stroke: #385268;\n  stroke-width: 1;\n  opacity: 0.65;\n}\n\n.mc-axis-text {\n  fill: #9bb0c2;\n  font-size: 12px;\n  font-family: \"Segoe UI\", Arial, sans-serif;\n}\n\n.mc-chart-line {\n  fill: none;\n  stroke: #48b8d0;\n  stroke-width: 2.5;\n  stroke-linecap: round;\n  stroke-linejoin: round;\n  vector-effect: non-scaling-stroke;\n}\n\n.mc-chart-point {\n  fill: #48b8d0;\n  stroke: #12273a;\n  stroke-width: 2;\n  vector-effect: non-scaling-stroke;\n}\n\n.mc-chart-empty {\n  position: absolute;\n  inset: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: var(--mc-muted);\n  font-size: 13px;\n}\n\n.mc-chart-footer {\n  display: flex;\n  justify-content: space-between;\n  gap: 12px;\n  color: var(--mc-muted);\n  font-size: 11px;\n  padding-left: 6px;\n}\n\n.mc-details {\n  display: flex;\n  flex-direction: column;\n}\n\n.mc-details .mc-panel-header {\n  margin-bottom: 17px;\n}\n\n.mc-detail-row {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  gap: 14px;\n  padding: 14px 0;\n  border-bottom: 1px solid var(--mc-border);\n  font-size: 12px;\n}\n\n.mc-detail-row:last-child { border-bottom: none; }\n\n.mc-detail-row span {\n  color: var(--mc-muted);\n}\n\n.mc-detail-row strong {\n  font-weight: 600;\n  text-align: right;\n  font-variant-numeric: tabular-nums;\n}\n\n.mc-text-hot { color: var(--mc-red); }\n.mc-text-cold { color: var(--mc-blue); }\n\n.mc-footer {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  flex-wrap: wrap;\n  gap: 15px;\n  padding: 20px 2px 6px;\n  margin-top: 16px;\n  border-top: 1px solid var(--mc-border);\n  font-size: 12px;\n}\n\n.mc-footer-device {\n  display: flex;\n  align-items: center;\n  gap: 12px;\n}\n\n.mc-footer-label,\n.mc-footer-meta {\n  color: var(--mc-muted);\n}\n\n.mc-footer-device strong {\n  font-weight: 600;\n}\n\n.mc-footer-meta {\n  display: flex;\n  align-items: center;\n  gap: 11px;\n}\n\n.mc-separator {\n  width: 3px;\n  height: 3px;\n  background: #70899e;\n  border-radius: 50%;\n}\n\n@media (max-width: 850px) {\n  .mc-metrics {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n\n  .mc-content {\n    grid-template-columns: 1fr;\n  }\n\n  .mc-statusbar {\n    align-items: flex-start;\n  }\n}\n\n@media (max-width: 520px) {\n  .mc-header,\n  .mc-statusbar {\n    flex-wrap: wrap;\n  }\n\n  .mc-status-time {\n    text-align: left;\n  }\n\n  .mc-metric { padding: 14px; }\n  .mc-panel { padding: 15px; }\n  .mc-chart { height: 220px; }\n  .mc-number { font-size: 27px; }\n}\n</style>\n",
+        "noerr": 0,
+        "storeOutMessages": true,
+        "passthru": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 810,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d505aaad13b0b228",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.36.0"
+        }
+    }
+]

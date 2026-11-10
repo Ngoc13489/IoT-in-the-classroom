@@ -35,21 +35,12 @@ IoT-in-the-classroom/
     │   └── ... giữ nguyên các tệp mã nguồn và cấu hình Wokwi hiện có
     ├── Mochi_NodeRED_Dashboard.json
     ├── docs/                         
-    │   └── BC_CaNhanIoT_NTHN.pdf
+    │   └── BC_CaNhanIoT_NTHN.docx
     └── images/                       
         └── ... ảnh mạch, OLED và Dashboard
 ```
 
 **Nguyên tắc tổ chức:** Giữ nguyên thư mục `Mochi_v1_6_MQTT_Dashboard_Stable/` và toàn bộ cấu trúc bên trong như phiên bản đang chạy ổn định; **không tự ý chuyển** `sketch.ino`, `diagram.json`, các tệp `.h/.cpp` hoặc cấu hình PlatformIO sang thư mục khác. Tên và danh sách tệp con sẽ được cập nhật sau khi kiểm tra nội dung thư mục thực tế.
-
-### Đưa dự án lên GitHub
-
-1. Vào repository `IoT-in-the-classroom`, mở thư mục `DoAnCaNhan/` đang chứa README này.
-2. Tải **nguyên thư mục** `Mochi_v1_6_MQTT_Dashboard_Stable/` lên, giữ nguyên cấu trúc bên trong.
-3. Tải tệp `Mochi_NodeRED_Dashboard.json` vào **cùng cấp với README.md**.
-4. Nếu công bố báo cáo, tạo `docs/`, xuất Word thành PDF và tải lên với tên `BC_CaNhanIoT_NTHN.pdf`.
-5. Nếu có ảnh chụp mô phỏng thật, tạo `images/` và tải ảnh lên; không cần tạo ảnh/tệp rỗng chỉ để đủ cây thư mục.
-6. Sau khi tải lên, kiểm tra các liên kết trong README có mở đúng tệp hay không.
 
 ## Hướng dẫn chạy mô phỏng
 
@@ -106,7 +97,7 @@ Theo biên bản kiểm thử PET/MONITOR của dự án, có **22 tình huống
 
 ## Tài liệu và video
 
-- **Báo cáo đồ án:** `docs/BC_CaNhanIoT_NTHN.pdf` *(dự kiến bổ sung; chưa có trên GitHub)*.
+- **Báo cáo đồ án:** `docs/BC_CaNhanIoT_NTHN.docx`.
 - **Ảnh minh họa:** `images/` .
 - **Video demo YouTube:** (https://www.youtube.com/watch?v=gol9ZqQjCO0).
 - **Mô phỏng Wokwi:** https://wokwi.com/projects/479910431597134849

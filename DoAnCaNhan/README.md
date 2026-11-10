@@ -7,7 +7,7 @@ Mochi là nguyên mẫu thú cưng ảo được xây dựng bằng **ESP32** v�
 ## Trải nghiệm dự án
 
 - **Mô phỏng Wokwi:** [Mở dự án Mochi](https://wokwi.com/projects/479910431597134849).
-- **Video demo YouTube:** Chưa công bố; sẽ cập nhật sau khi đăng video.
+- **Video demo YouTube:** [Mở video Mochi](https://www.youtube.com/watch?v=gol9ZqQjCO0).
 - **Mã nguồn:** Thư mục [`Mochi_v1_6_MQTT_Dashboard_Stable/`](./Mochi_v1_6_MQTT_Dashboard_Stable/) *(đường dẫn hoạt động sau khi tải thư mục lên GitHub)*.
 - **Flow Node-RED:** [`Mochi_NodeRED_Dashboard.json`](./Mochi_NodeRED_Dashboard.json) *(đường dẫn hoạt động sau khi tải tệp lên GitHub)*.
 - **Báo cáo:** Sẽ bổ sung vào thư mục `docs/` dưới dạng PDF.
@@ -34,9 +34,9 @@ IoT-in-the-classroom/
     ├── Mochi_v1_6_MQTT_Dashboard_Stable/
     │   └── ... giữ nguyên các tệp mã nguồn và cấu hình Wokwi hiện có
     ├── Mochi_NodeRED_Dashboard.json
-    ├── docs/                         # Dự kiến bổ sung
+    ├── docs/                         
     │   └── BC_CaNhanIoT_NTHN.pdf
-    └── images/                       # Dự kiến bổ sung (nếu có ảnh thực tế)
+    └── images/                       
         └── ... ảnh mạch, OLED và Dashboard
 ```
 
@@ -107,8 +107,8 @@ Theo biên bản kiểm thử PET/MONITOR của dự án, có **22 tình huống
 ## Tài liệu và video
 
 - **Báo cáo đồ án:** `docs/BC_CaNhanIoT_NTHN.pdf` *(dự kiến bổ sung; chưa có trên GitHub)*.
-- **Ảnh minh họa:** `images/` *(dự kiến bổ sung nếu có)*.
-- **Video demo YouTube:** *Chưa công bố; bổ sung URL sau khi đăng tải*.
+- **Ảnh minh họa:** `images/` .
+- **Video demo YouTube:** (https://www.youtube.com/watch?v=gol9ZqQjCO0).
 - **Mô phỏng Wokwi:** https://wokwi.com/projects/479910431597134849
 
 ## Tác giả và mục đích sử dụng

@@ -1,83 +1,142 @@
 # Mochi – Thú cưng ảo tương tác trên ESP32
 
-Mochi là nguyên mẫu thú cưng ảo được xây dựng bằng **ESP32** và mô phỏng trên **Wokwi** trong khuôn khổ môn **Lập trình IoT**. Hệ thống nhận dữ liệu môi trường và thao tác tương tác, xử lý phản ứng cục bộ, hiển thị trên **OLED SSD1306** và gửi dữ liệu giám sát qua **MQTT** đến **Node-RED Dashboard 2.0**.
+**Mochi** là nguyên mẫu thú cưng ảo trên ESP32, được phát triển trong môn **Lập trình IoT** và chạy trong môi trường mô phỏng **Wokwi**. Thiết bị nhận tín hiệu môi trường và tương tác, tự xử lý hành vi, hiển thị trên màn hình **OLED SSD1306**, đồng thời gửi dữ liệu qua **MQTT** đến **Node-RED Dashboard 2.0** để theo dõi.
 
-> **Phạm vi:** Đây là nguyên mẫu mô phỏng, chưa phải sản phẩm đã kiểm chứng trên phần cứng thật. Dashboard dùng để **giám sát một chiều**, không điều khiển ESP32 từ xa.
+> **Phạm vi:** Dự án được thử nghiệm trong môi trường mô phỏng, chưa được xác nhận trên phần cứng thực. Dashboard phục vụ **giám sát một chiều**, không gửi lệnh điều khiển về ESP32.
 
-## Trải nghiệm dự án
+## Xem nhanh
 
-- **Mô phỏng Wokwi:** [Mở dự án Mochi](https://wokwi.com/projects/479910431597134849).
-- **Video demo YouTube:** [Mở video Mochi](https://www.youtube.com/watch?v=gol9ZqQjCO0).
-- **Mã nguồn:** Thư mục [`Mochi_v1_6_MQTT_Dashboard_Stable/`](./Mochi_v1_6_MQTT_Dashboard_Stable/) *(đường dẫn hoạt động sau khi tải thư mục lên GitHub)*.
-- **Flow Node-RED:** [`Mochi_NodeRED_Dashboard.json`](./Mochi_NodeRED_Dashboard.json) *(đường dẫn hoạt động sau khi tải tệp lên GitHub)*.
-- **Báo cáo:** Sẽ bổ sung vào thư mục `docs/` dưới dạng PDF.
+- **[Video trình diễn trên YouTube](https://www.youtube.com/watch?v=gol9ZqQjCO0)**
+- **[Mô phỏng Mochi trên Wokwi](https://wokwi.com/projects/479910431597134849)**
+- **[Thư mục mã nguồn ESP32](./Mochi_v1_6_MQTT_Dashboard_Stable/)**
+- **[Tệp luồng Node-RED](./Mochi_NodeRED_Dashboard.json)**
 
-## Chức năng chính
+## 1. Chức năng
 
-| Thành phần | Chức năng |
-|---|---|
-| **PET** | Hiển thị biểu cảm RoboEyes; phản ứng với tương tác, nhiệt độ và ánh sáng; hiệu ứng nóng/lạnh, ngáp và ngủ. |
-| **MONITOR** | Hiển thị thông tin cảm biến trên hai trang OLED; thao tác tương tác để chuyển trang; cảnh báo nhiệt độ không tự đổi trang. |
-| **MQTT** | ESP32 xuất bản bản tin JSON chứa dữ liệu cảm biến và trạng thái. |
-| **Node-RED** | Nhận dữ liệu MQTT, xử lý các trường JSON và hiển thị Dashboard. |
+| Nhóm | Mô tả |
+| --- | --- |
+| **PET** | Hiển thị đôi mắt RoboEyes; phản ứng với tương tác và điều kiện môi trường; có các hiệu ứng nóng, lạnh, ngáp và ngủ. |
+| **MONITOR** | Hiển thị thông tin cảm biến trên hai trang OLED; nhấn nút tương tác để chuyển trang; cảnh báo nhiệt độ không tự chuyển trang. |
+| **MQTT** | ESP32 xuất bản dữ liệu cảm biến và trạng thái dưới dạng JSON. |
+| **Node-RED Dashboard** | Nhận dữ liệu MQTT, xử lý và trực quan hóa các giá trị/trạng thái của Mochi. |
 
-Các ngưỡng và chu kỳ dưới đây là **cấu hình của nguyên mẫu**, không phải ngưỡng tiêu chuẩn cho môi trường thực tế: HOT bắt đầu từ **32 °C** và thoát khi dưới **31 °C**; COLD bắt đầu từ **18 °C** trở xuống và thoát khi trên **19 °C**; điều kiện tối ở mức **20%** trở xuống, thoát tối khi trên **25%**. Đối chiếu các giá trị với phiên bản mã nguồn được công bố nếu có thay đổi.
+### Quy tắc phản ứng chính
 
-## Cấu trúc repository
+| Điều kiện | Phản ứng |
+| --- | --- |
+| Nhiệt độ **≥ 32 °C** | Bật hiệu ứng **HOT**; tắt khi nhiệt độ **< 31 °C**. |
+| Nhiệt độ **≤ 18 °C** | Bật hiệu ứng **COLD**; tắt khi nhiệt độ **> 19 °C**. |
+| Mức sáng quy ước **≤ 20%** | Chuyển sang quy trình ngáp rồi ngủ; thoát điều kiện tối khi mức sáng **> 25%**. |
+| Có tương tác trong lúc ngủ | Mochi có thể phản ứng; nếu môi trường vẫn tối, quay lại quy trình ngủ theo logic chương trình. |
+| Chế độ **MONITOR** | Nút tương tác chuyển giữa hai trang dữ liệu. |
 
-Dự án Mochi là **một thư mục con** trong repository `IoT-in-the-classroom`, không phải repository độc lập. Hiện tại trên GitHub, bạn mới đưa lên `DoAnCaNhan/README.md`. Các tệp còn lại trong cây dưới đây là **kế hoạch tải lên**, không phải danh sách tệp đã có sẵn trên GitHub.
+Các giá trị trên là **ngưỡng phần mềm của nguyên mẫu**, không phải khuyến nghị về nhiệt độ hay ánh sáng thực tế. Phần trăm ánh sáng là giá trị quy đổi từ ADC, **không phải lux**.
+
+## 2. Thành phần mô phỏng và kết nối
+
+| Thành phần | ESP32 | Vai trò |
+| --- | --- | --- |
+| DHT22 | GPIO27 | Nhiệt độ và độ ẩm không khí |
+| Quang trở, đầu ra analog | GPIO35 (ADC1) | Tín hiệu ánh sáng |
+| Biến trở | GPIO34 (ADC1) | Giả lập mức tín hiệu âm thanh |
+| Nút nhấn | GPIO25 | Giả lập thao tác chạm/tương tác |
+| Công tắc trượt | GPIO32 | Chọn PET/MONITOR |
+| OLED SSD1306 – SDA | GPIO21 | Dữ liệu I²C |
+| OLED SSD1306 – SCL | GPIO22 | Xung nhịp I²C |
+
+OLED có độ phân giải **128 × 64**, địa chỉ I²C **`0x3C`**. Biến trở **không phải micro**, nút nhấn **không phải cảm biến chạm thực**. Sơ đồ kết nối chi tiết được xác định bởi `diagram.json` của dự án.
+
+## 3. Kiến trúc hệ thống
+
+```text
+DHT22 ───────────────┐
+Quang trở ───────────┤
+Biến trở (giả âm) ───┤
+Nút nhấn ────────────┼──> ESP32 ──> OLED SSD1306 (PET / MONITOR)
+Công tắc trượt ──────┘       │
+                             └── Wi-Fi ── MQTT broker ── Node-RED ── Dashboard
+```
+
+**Phản ứng của Mochi được xử lý tại ESP32.** MQTT là kênh gửi dữ liệu giám sát; Dashboard không quyết định biểu cảm và không điều khiển thiết bị từ xa.
+
+## 4. Cấu trúc dự án
+
+Dự án nằm trong thư mục `DoAnCaNhan` của repository `IoT-in-the-classroom`:
 
 ```text
 IoT-in-the-classroom/
 └── DoAnCaNhan/
     ├── README.md
-    ├── Mochi_v1_6_MQTT_Dashboard_Stable/
-    │   └── ... giữ nguyên các tệp mã nguồn và cấu hình Wokwi hiện có
-    ├── Mochi_NodeRED_Dashboard.json
-    ├── docs/                         
-    │   └── BC_CaNhanIoT_NTHN.docx
-    └── images/                       
-        └── ... ảnh mạch, OLED và Dashboard
+    ├── Mochi_v1_6_MQTT_Dashboard_Stable/   # Dự án ESP32/Wokwi
+    └── Mochi_NodeRED_Dashboard.json        # Flow Node-RED
 ```
 
-**Nguyên tắc tổ chức:** Giữ nguyên thư mục `Mochi_v1_6_MQTT_Dashboard_Stable/` và toàn bộ cấu trúc bên trong như phiên bản đang chạy ổn định; **không tự ý chuyển** `sketch.ino`, `diagram.json`, các tệp `.h/.cpp` hoặc cấu hình PlatformIO sang thư mục khác. Tên và danh sách tệp con sẽ được cập nhật sau khi kiểm tra nội dung thư mục thực tế.
+Thư mục mã nguồn chứa các tệp chương trình và cấu hình mô phỏng. Các tệp thường được tham chiếu trong báo cáo gồm `sketch.ino`, `diagram.json`, `MochiDisplay.cpp`, `MochiDisplay.h` và `MochiTypes.h`; vị trí cụ thể của chúng phụ thuộc vào cấu trúc được lưu trong thư mục dự án. Không cần di chuyển các tệp ra khỏi thư mục gốc của dự án.
 
-## Hướng dẫn chạy mô phỏng
+## 5. Chạy mô phỏng Wokwi
 
-### Cách 1: Mở trực tiếp trên Wokwi
+### Cách nhanh nhất: mở dự án trực tuyến
 
-1. Mở [dự án Mochi trên Wokwi](https://wokwi.com/projects/479910431597134849).
-2. Chọn **Start Simulation**, chờ ESP32 khởi động và quan sát OLED ở chế độ **PET**.
-3. Thay đổi giá trị cảm biến nhiệt độ/độ ẩm và ánh sáng để quan sát phản ứng; thao tác với đầu vào tương tác để kiểm tra biểu cảm.
-4. Chuyển công tắc **PET/MONITOR**. Trong MONITOR, dùng đầu vào tương tác để chuyển giữa hai trang dữ liệu.
-5. Các phản ứng cục bộ PET/MONITOR có thể được quan sát mà không cần mở Node-RED Dashboard.
+1. Mở **[Mochi trên Wokwi](https://wokwi.com/projects/479910431597134849)**.
+2. Nhấn **Start Simulation** và chờ ESP32 khởi động.
+3. Quan sát OLED; thử thay đổi nhiệt độ DHT22, ánh sáng và giá trị biến trở trên sơ đồ.
+4. Nhấn nút tương tác để quan sát phản ứng của Mochi.
+5. Chuyển công tắc giữa **PET** và **MONITOR**; trong MONITOR, nhấn nút tương tác để chuyển trang.
 
-### Cách 2: Sử dụng mã nguồn trong GitHub
+Có thể quan sát **phản ứng cục bộ trên OLED** mà không cần mở Node-RED. Để xem Dashboard, thực hiện thêm phần 6.
 
-1. Tải repository bằng **Code → Download ZIP** hoặc clone repository:
+### Sử dụng mã nguồn từ GitHub
 
-   ```bash
-   git clone https://github.com/<ten-tai-khoan>/IoT-in-the-classroom.git
-   ```
+1. Tại repository GitHub, chọn **Code → Download ZIP** (hoặc sử dụng Git để clone repository).
+2. Giải nén và mở thư mục `DoAnCaNhan/Mochi_v1_6_MQTT_Dashboard_Stable/`.
+3. Đọc các tệp cấu hình đi kèm, đặc biệt `diagram.json` và tệp khai báo thư viện (nếu có), để xác định cách chạy trong Wokwi/VS Code.
+4. Giữ nguyên cấu trúc thư mục khi mở hoặc nhập dự án vào môi trường phát triển tương ứng.
 
-   Thay `<ten-tai-khoan>` bằng tên tài khoản GitHub thực tế.
-2. Mở `IoT-in-the-classroom/DoAnCaNhan/Mochi_v1_6_MQTT_Dashboard_Stable/`.
-3. Giữ nguyên các tệp của dự án. Cách mở/chạy phụ thuộc vào cấu trúc thực tế: dự án Wokwi trực tiếp hoặc Wokwi tích hợp VS Code/PlatformIO. **Không giả định** luôn có `sketch.ino` ở thư mục gốc.
-4. Đối chiếu cấu hình linh kiện và thư viện với phiên bản Wokwi công khai trước khi chạy.
+**Lưu ý về môi trường:** Liên kết Wokwi trực tuyến là đường chạy nhanh đã được công bố. Cách chạy bản tải về trong VS Code/PlatformIO/Wokwi CLI phụ thuộc vào tệp cấu hình thực tế trong thư mục mã nguồn; không thể mặc định một lệnh build duy nhất cho mọi cấu trúc dự án.
 
-**Lưu ý:** Loại cảm biến và cách thao tác đầu vào phải theo đúng sơ đồ/cấu hình của phiên bản công khai. Không tự thay DHT11/DHT22 hoặc nút nhấn/cảm ứng chỉ dựa vào ảnh minh họa cũ.
+## 6. Thiết lập Node-RED Dashboard
 
-## Thiết lập MQTT và Node-RED
+### 6.1. Chuẩn bị
 
-**Yêu cầu:** Node.js, Node-RED và các node **FlowFuse Dashboard / Dashboard 2.0** mà flow thực tế sử dụng.
+Cần có **Node.js** (kèm npm), **Node-RED** và gói **FlowFuse Dashboard 2.0** (`@flowfuse/node-red-dashboard`).
 
-1. Cài đặt và khởi động Node-RED trên máy tính.
-2. Trong Node-RED Editor, chọn **Menu → Import**, nhập tệp [`Mochi_NodeRED_Dashboard.json`](./Mochi_NodeRED_Dashboard.json) nằm cùng cấp với README. Cài các node còn thiếu nếu Node-RED thông báo.
-3. Kiểm tra cấu hình MQTT broker, topic và các node; sau đó chọn **Deploy**.
-4. Chạy mô phỏng Wokwi; kiểm tra node MQTT đã kết nối và Dashboard có nhận bản tin.
-5. Mở địa chỉ Dashboard được cấu hình trong flow. Địa chỉ được ghi nhận trong dự án là `http://localhost:1880/dashboard/mochi` — địa chỉ này chỉ hoạt động trên máy đang chạy Node-RED và khi route của Dashboard không bị thay đổi.
+Kiểm tra Node.js và npm trong Terminal/PowerShell:
 
-Cấu hình được mô tả trong hồ sơ dự án:
+```bash
+node --version
+npm --version
+```
+
+Nếu chưa có Node.js, cài từ [nodejs.org](https://nodejs.org/), sau đó mở lại Terminal. Cài Node-RED:
+
+```bash
+npm install -g node-red
+```
+
+Khởi động Node-RED:
+
+```bash
+node-red
+```
+
+Mở trình duyệt tại **http://localhost:1880**. Giữ Terminal chạy trong suốt quá trình sử dụng Node-RED.
+
+### 6.2. Cài Dashboard 2.0
+
+1. Trong Node-RED Editor, mở **Menu → Manage palette → Install**.
+2. Tìm **`@flowfuse/node-red-dashboard`** và chọn **Install**.
+3. Chờ cài đặt hoàn tất. Nếu Node-RED yêu cầu, khởi động lại dịch vụ.
+
+### 6.3. Nhập flow Mochi
+
+1. Tải tệp **[`Mochi_NodeRED_Dashboard.json`](./Mochi_NodeRED_Dashboard.json)** từ thư mục dự án.
+2. Trong Node-RED Editor, chọn **Menu → Import**, chọn tệp JSON, rồi **Import**.
+3. Kiểm tra các node MQTT, xử lý JSON và Dashboard; cài thêm node còn thiếu nếu được thông báo.
+4. Kiểm tra thông số broker và topic ở các node MQTT, sau đó chọn **Deploy**.
+5. Chạy mô phỏng Mochi trên Wokwi, chờ kết nối Wi-Fi/MQTT, rồi kiểm tra các node nhận dữ liệu.
+6. Mở **http://localhost:1880/dashboard/mochi** để xem giao diện nếu flow giữ nguyên đường dẫn Dashboard này. Nếu không mở được, kiểm tra cấu hình đường dẫn trong Dashboard của Node-RED.
+
+### 6.4. Cấu hình MQTT
 
 ```text
 Broker: broker.hivemq.com
@@ -85,25 +144,71 @@ Port:   1883
 Topic:  mochi/v1/test84721/telemetry
 ```
 
-Đây là broker thử nghiệm công khai, sử dụng cổng MQTT không mã hóa. **Không gửi thông tin cá nhân, mật khẩu hoặc token** qua topic này. Nếu thay đổi topic trong mã nguồn, phải cập nhật tương ứng trong Node-RED.
+ESP32 đóng vai trò **publisher**, Node-RED là **subscriber**. Chu kỳ xuất bản được cấu hình danh định là **2.000 ms** khi điều kiện kết nối cho phép; đây **không phải độ trễ mạng được đo**.
 
-Các trường bản tin được mô tả gồm `device_id`, `mode`, `temperature_c`, `humidity_pct`, `dht_ok`, `light_pct`, `light_adc`, `sound_adc`, `dark`, `temperature_status` và `sleeping`. Dashboard hiển thị các trường theo cấu hình flow; không nhất thiết hiển thị toàn bộ JSON.
+Broker được sử dụng là dịch vụ thử nghiệm công khai, cổng 1883 **không mã hóa**. Không gửi mật khẩu, token hoặc dữ liệu cá nhân. Nếu thay đổi topic trong chương trình ESP32, phải thay topic tương ứng trong node MQTT của Node-RED. Trên broker công khai, các thiết bị sử dụng cùng topic có thể nhận dữ liệu của nhau; nên đổi topic riêng khi tái sử dụng dự án.
 
-## Kiểm thử và giới hạn
+### 6.5. Dữ liệu gửi đi
 
-Theo biên bản kiểm thử PET/MONITOR của dự án, có **22 tình huống**: **21 tình huống được ghi nhận đạt**, **1 tình huống chưa thực hiện** do hạn chế thao tác đồng thời trong môi trường mô phỏng. Thống kê này **không bao gồm kiểm thử hiệu năng MQTT/Node-RED** và không đồng nghĩa với việc đã đo độ trễ mạng, độ chính xác cảm biến hay độ ổn định trên thiết bị thật.
+Bản tin MQTT ở dạng JSON, gồm các trường:
 
-Ảnh và video minh chứng phải lấy từ phiên chạy thực tế. Sơ đồ thiết kế không thay thế được bằng chứng thực thi.
+| Trường | Ý nghĩa |
+| --- | --- |
+| `device_id` | Mã định danh thiết bị |
+| `mode` | Chế độ PET hoặc MONITOR |
+| `temperature_c` | Nhiệt độ (°C) |
+| `humidity_pct` | Độ ẩm không khí (%) |
+| `dht_ok` | Trạng thái đọc DHT |
+| `light_pct` | Mức sáng quy đổi (%) |
+| `light_adc` | Giá trị ADC ánh sáng |
+| `sound_adc` | Giá trị ADC giả lập âm thanh |
+| `dark` | Trạng thái điều kiện tối |
+| `temperature_status` | Trạng thái nhiệt độ |
+| `sleeping` | Trạng thái ngủ |
 
-## Tài liệu và video
+Dashboard thể hiện các chỉ số/trạng thái được cấu hình trong flow, không nhất thiết hiển thị toàn bộ trường JSON.
 
-- **Báo cáo đồ án:** `docs/BC_CaNhanIoT_NTHN.docx`.
-- **Ảnh minh họa:** `images/` .
-- **Video demo YouTube:** (https://www.youtube.com/watch?v=gol9ZqQjCO0).
-- **Mô phỏng Wokwi:** https://wokwi.com/projects/479910431597134849
+## 7. Thử nhanh các chức năng
 
-## Tác giả và mục đích sử dụng
+Các bước dưới đây là **kịch bản thao tác kiểm tra**, không phải số liệu đo hiệu năng:
 
-Dự án được thực hiện phục vụ học tập môn **Lập trình IoT**. Mã nguồn, tài liệu và hình ảnh được công bố nhằm giới thiệu cách xây dựng nguyên mẫu tương tác trên ESP32 và giám sát bằng MQTT–Node-RED.
+1. **PET:** Khởi động mô phỏng, quan sát biểu cảm mặc định; nhấn nút tương tác để xem phản ứng.
+2. **HOT:** Chỉnh nhiệt độ DHT22 lên **34 °C**, quan sát hiệu ứng nóng; giảm xuống dưới **31 °C** để kiểm tra thoát HOT.
+3. **COLD:** Chỉnh nhiệt độ xuống **16 °C**, quan sát hiệu ứng lạnh; tăng lên trên **19 °C** để kiểm tra thoát COLD.
+4. **Ngủ:** Giảm mức sáng đến vùng tối, quan sát quá trình ngáp rồi ngủ; thử tương tác khi đang ngủ và tăng sáng để quan sát thay đổi.
+5. **MONITOR:** Chuyển công tắc sang MONITOR, nhấn nút để đổi giữa hai trang OLED; kiểm tra cảnh báo nhiệt độ không tự chuyển trang.
+6. **Dashboard:** Khi Node-RED đã kết nối, thay đổi nhiệt độ trong Wokwi và quan sát giá trị/trạng thái trên Dashboard.
 
-**Giấy phép:** Chưa xác định. Chỉ bổ sung tệp `LICENSE` sau khi lựa chọn giấy phép phù hợp; việc repository công khai không tự động đồng nghĩa với cấp phép tái sử dụng.
+Nếu một bước không khớp, cần đối chiếu với **phiên bản mã nguồn và sơ đồ đang chạy**; không xem các thao tác gợi ý này là bằng chứng rằng mọi chức năng đã được kiểm thử lại trên phiên bản mới.
+
+## 8. Khắc phục sự cố
+
+| Hiện tượng | Kiểm tra |
+| --- | --- |
+| Không chạy được Wokwi | Kiểm tra trạng thái mô phỏng, tệp sơ đồ và thông báo biên dịch. |
+| OLED không hiển thị | Kiểm tra kết nối SDA GPIO21, SCL GPIO22, địa chỉ I²C `0x3C` và log chương trình. |
+| Không thấy phản ứng HOT/COLD | Kiểm tra nhiệt độ DHT22, ngưỡng kích hoạt/thoát và trạng thái đọc cảm biến. |
+| Node-RED không mở | Kiểm tra Node.js, lệnh `node-red`, Terminal đang chạy và cổng `1880`. |
+| Import flow bị thiếu node | Cài `@flowfuse/node-red-dashboard` và các node khác được Node-RED chỉ rõ. |
+| MQTT không kết nối | Kiểm tra kết nối Wi-Fi của Wokwi, địa chỉ broker, cổng 1883, tình trạng dịch vụ và cấu hình node MQTT. |
+| Dashboard không có dữ liệu | Kiểm tra đã **Deploy**, trạng thái node MQTT, topic của publisher/subscriber và nội dung bản tin. |
+| Đường dẫn Dashboard không mở | Kiểm tra route thực tế trong cấu hình Dashboard 2.0; đường dẫn có thể khác nếu flow được chỉnh sửa. |
+
+## 9. Kết quả và giới hạn
+
+Theo biên bản kiểm thử chức năng PET/MONITOR, nguyên mẫu có **22 tình huống**, trong đó **21 tình huống được ghi nhận đạt** và **1 tình huống chưa thực hiện** do giới hạn thao tác đồng thời trong môi trường Wokwi. Kết quả này **không phải** thống kê kiểm thử hiệu năng MQTT/Node-RED.
+
+Dự án chưa cung cấp phép đo định lượng về độ trễ đầu cuối, tỷ lệ mất bản tin, độ chính xác cảm biến, điện năng tiêu thụ hoặc độ ổn định trên phần cứng thật. Giá trị âm thanh từ biến trở và phần trăm ánh sáng chỉ phục vụ mô phỏng logic.
+
+## 10. Tài liệu và liên kết
+
+- [Video demo Mochi trên YouTube](https://www.youtube.com/watch?v=gol9ZqQjCO0)
+- [Dự án mô phỏng Wokwi](https://wokwi.com/projects/479910431597134849)
+- [Mã nguồn ESP32/Wokwi](./Mochi_v1_6_MQTT_Dashboard_Stable/)
+- [Flow Node-RED Dashboard](./Mochi_NodeRED_Dashboard.json)
+
+## 11. Tác giả và phạm vi sử dụng
+
+**Nguyễn Thị Hồng Ngọc** – Đồ án cá nhân môn **Lập trình IoT**, Khoa Công nghệ Thông tin, Trường Đại học An Giang (2026).
+
+Dự án được công bố để giới thiệu và tham khảo cách xây dựng nguyên mẫu ESP32 tương tác, kết hợp giám sát MQTT và Node-RED. Repository chưa có tuyên bố giấy phép tái sử dụng riêng; việc mã nguồn được công khai không mặc nhiên cấp quyền sử dụng lại theo một giấy phép mã nguồn mở.
